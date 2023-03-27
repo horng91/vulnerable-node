@@ -21,7 +21,7 @@ env:
   GKE_ZONE: asia-southeast1-b  # Add your cluster zone here.
   DEPLOYMENT_NAME: vul-img # Add your deployment name here.
   IMAGE: vul-site
-  TAG_ID: ${{ github.sha }}
+
 
 jobs:
   setup-build-publish-deploy:
