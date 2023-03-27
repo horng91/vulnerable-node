@@ -11,7 +11,7 @@ spec:
       app: vul-workload
     spec:
       containers:
-      - image: gcr.io/my-rd-ce-horng-lee/vul-site:0edaa38d29d3174cb8a8a234e639f91c9d3d9127
+      - image: gcr.io/my-rd-ce-horng-lee/REPO_ID:IMAGE_TAG
         imagePullPolicy: IfNotPresent
         name: vul-site
         resources: {}
