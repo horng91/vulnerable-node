@@ -65,6 +65,12 @@ jobs:
         docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
 
     # Deploy the Docker image to the GKE cluster
+    #- name: Deploy
+    #  run: |-
+    #    kubectl create deployment vul-workload --image=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
+    # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |-
-        kubectl create deployment vul-workload --image=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
+         sed -ie 's|REPO_ID:IMAGE_TAG|$PROJECT_ID:$GITHUB_SHA|g' deployment.yaml
+         cat deployment.yaml
+         kubectl apply -f deployment.yaml
