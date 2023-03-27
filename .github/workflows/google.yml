@@ -21,6 +21,7 @@ env:
   GKE_ZONE: asia-southeast1-b  # Add your cluster zone here.
   DEPLOYMENT_NAME: vul-img # Add your deployment name here.
   IMAGE: vul-site
+  TAG_ID: ${{ github.sha }}
 
 jobs:
   setup-build-publish-deploy:
@@ -71,6 +72,7 @@ jobs:
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |-
-         sed -ie 's|REPO_ID:IMAGE_TAG|$PROJECT_ID:$GITHUB_SHA|g' deployment.yaml
+         sed -i -e 's|REPO_ID:IMAGE_TAG|gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA|g' deployment.yaml
          cat deployment.yaml
          kubectl apply -f deployment.yaml
+         
