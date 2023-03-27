@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: vul-workload
+  name: vul-workload
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: vul-workload
+    spec:
+      containers:
+      - image: gcr.io/my-rd-ce-horng-lee/vul-site:0edaa38d29d3174cb8a8a234e639f91c9d3d9127
+        imagePullPolicy: IfNotPresent
+        name: vul-site
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
