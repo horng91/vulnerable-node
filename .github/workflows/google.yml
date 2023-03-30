@@ -60,7 +60,7 @@ jobs:
           --build-arg GITHUB_REF="$GITHUB_REF" \
           .
     # login to docker 
-    - name: Login
+    - name: 'Login'
       - uses: 'docker/login-action@v1'
       with:
         registry: 'asia-southeast1-docker.pkg.dev'
