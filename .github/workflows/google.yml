@@ -42,7 +42,7 @@ jobs:
     # Configure Docker to use the gcloud command-line tool as a credential
     # helper for authentication
     - run: |-
-        gcloud --quiet auth configure-docker
+        gcloud --quiet auth configure-docker asia-southeast1-docker.pkg.dev
 
     # Get the GKE credentials so we can deploy to the cluster
     - uses: google-github-actions/get-gke-credentials@fb08709ba27618c31c09e014e1d8364b02e5042e
@@ -59,12 +59,6 @@ jobs:
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
           .
-
-    # login to docker 
-    - name: 'login'
-      run: |-
-        cat ${{ secrets.GKE_SA_KEY }} | docker login -u _json_key --password-stdin \
-        https://asia-southeast1-docker.pkg.dev
 
     # Push the Docker image to Google Container Registry
     - name: Publish
