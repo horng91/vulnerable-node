@@ -55,7 +55,7 @@ jobs:
     - name: Build
       run: |-
         docker build \
-          --tag "asia-southeast1-docker.pkg.dev/my-rd-ce-horng-lee/ys-artifact-registry/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
+          --tag "asia-southeast1-docker.pkg.dev/$PROJECT_ID/ys-artifact-registry/$IMAGE:$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
           .
@@ -63,7 +63,7 @@ jobs:
     # Push the Docker image to Google Container Registry
     - name: Publish
       run: |-
-        docker push "asia-southeast1-docker.pkg.dev/my-rd-ce-horng-lee/ys-artifact-registry/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
+        docker push "asia-southeast1-docker.pkg.dev/$PROJECT_ID/ys-artifact-registry/$IMAGE:$GITHUB_SHA"
 
     # Deploy the Docker image to the GKE cluster
     #- name: Deploy
@@ -72,7 +72,7 @@ jobs:
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |-
-         sed -i -e "s|REPO_ID:IMAGE_TAG|gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA|g" deployment.yaml
+         sed -i -e "s|REPO_ID:IMAGE_TAG|asia-southeast1-docker.pkg.dev/$PROJECT_ID/ys-artifact-registry/$IMAGE:$GITHUB_SHA|g" deployment.yaml
          cat deployment.yaml
          kubectl apply -f deployment.yaml
          
