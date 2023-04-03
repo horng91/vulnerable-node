@@ -90,7 +90,7 @@ This project has the most common vulnerabilities of `OWASP Top 10 <https://www.o
 - A8  - Cross-Site Request Forgery (CSRF)
 - A10 - Unvalidated Redirects and Forwards
 
-## Vulnerability code location test
+## Vulnerability code location
 
 The exactly code location of each vulnerability is pending to write
 
