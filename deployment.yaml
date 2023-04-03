@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: vul-workload
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: vul-workload
@@ -14,3 +15,13 @@ spec:
       containers:
       - image: REPO_ID:IMAGE_TAG
         name: vul-site
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - vul-workload
+            topologyKey: "kubernetes.io/hostname"
